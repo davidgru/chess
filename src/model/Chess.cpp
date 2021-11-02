@@ -10,7 +10,7 @@
 Chess::Chess()
 {
     this->state.game_state = GameState::IN_PROGRESS;
-    this->state.selected = { -1, -1 };
+    this->state.selected = {-1, -1};
     this->place_pieces();
 }
 
@@ -46,11 +46,11 @@ bool Chess::move(vec2 v)
         return true;
 
     // Move
-    if (this->state.position.move({ this->state.selected, v }))
+    if (this->state.position.move({this->state.selected, v}))
         return true;
 
     // Prepare for next move
-    this->state.selected = { -1, -1 };
+    this->state.selected = {-1, -1};
     this->state.legal_moves.clear();
 
     // 3-fold repetition?
@@ -65,13 +65,15 @@ bool Chess::move(vec2 v)
 void Chess::update_game_status()
 {
     // 3-fold repetition?
-    if (this->all_positions[this->state.position] >= 3) {
+    if (this->all_positions[this->state.position] >= 3)
+    {
         this->state.game_state = GameState::DRAW;
         return;
     }
     // player able to move?
     bool has_moves = this->state.position.can_move_at_all();
-    if (has_moves) {
+    if (has_moves)
+    {
         this->state.game_state = GameState::IN_PROGRESS;
         return;
     }
@@ -86,14 +88,14 @@ void Chess::update_game_status()
 
 void Chess::place_pieces()
 {
-    this->state.position.place({ PieceType::ROOK, Color::WHITE }, { 0, 0 });
+    this->state.position.place({PieceType::ROOK, Color::WHITE}, {0, 0});
     // this->state.position.place({ PieceType::KNIGHT, Color::WHITE }, { 0, 1 });
     // this->state.position.place({ PieceType::BISHOP, Color::WHITE }, { 0, 2 });
     // this->state.position.place({ PieceType::QUEEN, Color::WHITE }, { 0, 3 });
-    this->state.position.place({ PieceType::KING, Color::WHITE }, { 0, 4 });
+    this->state.position.place({PieceType::KING, Color::WHITE}, {0, 4});
     // this->state.position.place({ PieceType::BISHOP, Color::WHITE }, { 0, 5 });
     // this->state.position.place({ PieceType::KNIGHT, Color::WHITE }, { 0, 6 });
-    this->state.position.place({ PieceType::ROOK, Color::WHITE }, { 0, 7 });
+    this->state.position.place({PieceType::ROOK, Color::WHITE}, {0, 7});
     // this->state.position.place({ PieceType::PAWN, Color::WHITE }, { 1, 0 });
     // this->state.position.place({ PieceType::PAWN, Color::WHITE }, { 1, 1 });
     // this->state.position.place({ PieceType::PAWN, Color::WHITE }, { 1, 2 });
@@ -110,12 +112,12 @@ void Chess::place_pieces()
     // this->state.position.place({ PieceType::PAWN, Color::BLACK }, { 6, 5 });
     // this->state.position.place({ PieceType::PAWN, Color::BLACK }, { 6, 6 });
     // this->state.position.place({ PieceType::PAWN, Color::BLACK }, { 6, 7 });
-    this->state.position.place({ PieceType::ROOK, Color::BLACK }, { 7, 0 });
+    this->state.position.place({PieceType::ROOK, Color::BLACK}, {7, 0});
     // this->state.position.place({ PieceType::KNIGHT, Color::BLACK }, { 7, 1 });
     // this->state.position.place({ PieceType::BISHOP, Color::BLACK }, { 7, 2 });
     // this->state.position.place({ PieceType::QUEEN, Color::BLACK }, { 7, 3 });
-    this->state.position.place({ PieceType::KING, Color::BLACK }, { 7, 4 });
+    this->state.position.place({PieceType::KING, Color::BLACK}, {7, 4});
     // this->state.position.place({ PieceType::BISHOP, Color::BLACK }, { 7, 5 });
     // this->state.position.place({ PieceType::KNIGHT, Color::BLACK }, { 7, 6 });
-    this->state.position.place({ PieceType::ROOK, Color::BLACK }, { 7, 7 });
+    this->state.position.place({PieceType::ROOK, Color::BLACK}, {7, 7});
 }

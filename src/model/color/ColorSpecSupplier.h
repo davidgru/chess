@@ -2,9 +2,10 @@
 
 #include "ColorSpec.h"
 
-class ColorSpecSupplier {
+class ColorSpecSupplier
+{
 public:
-    static const ColorSpec& get(Color color);
+    static const ColorSpec &get(Color color);
 
 private:
     ColorSpecSupplier() = default;

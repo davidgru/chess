@@ -4,7 +4,8 @@
 
 #include "Color.h"
 
-struct ColorSpec {
+struct ColorSpec
+{
     const Color color;
     const Color opposite;
     const int back_row;

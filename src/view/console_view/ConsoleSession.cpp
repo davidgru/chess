@@ -14,25 +14,27 @@ ConsoleSession::ConsoleSession()
 {
 }
 
-void ConsoleSession::add_command(Command* command)
+void ConsoleSession::add_command(Command *command)
 {
     this->commands[command->get_name()] = command;
 }
 
 void ConsoleSession::start()
 {
-    while (!this->over) {
+    while (!this->over)
+    {
         this->clear_screen();
         this->show();
         this->process_command();
     }
 }
 
-void ConsoleSession::on_update(const ChessState& state)
+void ConsoleSession::on_update(const ChessState &state)
 {
     std::vector<std::pair<std::string, std::string>> command_descs;
-    for (const auto& [name, cmd] : this->commands) {
-        std::pair<std::string, std::string> p = { name, cmd->get_description() };
+    for (const auto &[name, cmd] : this->commands)
+    {
+        std::pair<std::string, std::string> p = {name, cmd->get_description()};
         command_descs.push_back(p);
     }
 
@@ -70,7 +72,7 @@ void ConsoleSession::process_command()
     if (CommandParser::parse(input_str, command_name, param_strs))
         return;
 
-    Command* command = this->commands[command_name];
+    Command *command = this->commands[command_name];
     if (command == nullptr)
         return;
     Result result = command->apply(param_strs);

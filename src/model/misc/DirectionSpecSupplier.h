@@ -3,9 +3,11 @@
 #include "Direction.h"
 #include "DirectionSpec.h"
 
-class DirectionSpecSupplier {
+class DirectionSpecSupplier
+{
 public:
-    static const DirectionSpec& get(Direction direction);
+    static const DirectionSpec &get(Direction direction);
+
 private:
     DirectionSpecSupplier() = default;
 };
