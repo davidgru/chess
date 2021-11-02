@@ -1,6 +1,6 @@
 
 # ignore vscode config
-/.vscode
+.vscode/
 
 # ignore executables
 *.exe
