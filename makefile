@@ -1,4 +1,4 @@
-CXX := g++
+CXX := clang++
 
 SRC_DIR := src
 OBJ_DIR := obj
@@ -30,7 +30,7 @@ OBJ := $(patsubst $(SRC_DIR)/%.$(SRC_EXT), $(OBJ_DIR)/%.o, $(SRC))
 OBJ_DIRS := $(dir $(OBJ))
 
 CPPFLAGS :=
-CFLAGS :=
+CFLAGS := -std=c++17
 LDFLAGS :=
 LDLIBS :=
 
