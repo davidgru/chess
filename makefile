@@ -18,8 +18,8 @@ _SRC := \
 	model/color/ColorSpecSupplier.cpp \
 	model/misc/DirectionSpecSupplier.cpp \
 	model/piece/PieceHandler.cpp model/piece/PieceHandlerSupplier.cpp \
-	model/piece/piecehandler/BishopHandler.cpp model/piece/piecehandler/KingHandler.cpp model/piece/piecehandler/KnightHandler.cpp model/piece/piecehandler/NullHandler.cpp \
-	model/piece/piecehandler/PawnHandler.cpp model/piece/piecehandler/QueenHandler.cpp model/piece/piecehandler/RookHandler.cpp model/piece/piecehandler/StraightMovingPieceHandler.cpp \
+	model/piece/piecehandler/BishopHandler.cpp model/piece/piecehandler/KingHandler.cpp model/piece/piecehandler/KnightHandler.cpp model/piece/piecehandler/PawnHandler.cpp \
+	model/piece/piecehandler/QueenHandler.cpp model/piece/piecehandler/RookHandler.cpp model/piece/piecehandler/StraightMovingPieceHandler.cpp \
 	model/position/CastlingRights.cpp model/position/Position.cpp \
 	\
 	view/console_view/CommandParser.cpp view/console_view/ConsoleSession.cpp view/console_view/PieceTextures.cpp view/console_view/Screenbuffer.cpp
@@ -50,7 +50,7 @@ clean:
 	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 
 rebuild:
-	@make clean
+	make clean
 	make
 
 .PHONY: all clean rebuild

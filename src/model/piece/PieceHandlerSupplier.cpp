@@ -4,14 +4,13 @@
 #include "piecehandler/BishopHandler.h"
 #include "piecehandler/KingHandler.h"
 #include "piecehandler/KnightHandler.h"
-#include "piecehandler/NullHandler.h"
 #include "piecehandler/PawnHandler.h"
 #include "piecehandler/QueenHandler.h"
 #include "piecehandler/RookHandler.h"
 
 const PieceHandler &PieceHandlerSupplier::get(PieceType piece_type)
 {
-    static const NullHandler h0;
+    static const PieceHandler h0; // just a null-object
     static const PawnHandler h1;
     static const KnightHandler h2;
     static const BishopHandler h3;

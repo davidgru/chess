@@ -63,6 +63,11 @@ void PieceHandler::move(Position &pos, Move m) const
     pos.place(pd, m.to);
 }
 
+void PieceHandler::_get_legal_moves(const class Position & /*pos*/, vec2 /*current*/, std::vector<vec2> &out_legal_destinations, bool /*check_king_exposure*/) const
+{
+    out_legal_destinations.clear();
+}
+
 void PieceHandler::_move(class Position & /*pos*/, Move /*m*/) const
 {
     // Empty default.

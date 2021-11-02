@@ -22,6 +22,6 @@ public:
     void move(class Position &pos, Move m) const;
 
 protected:
-    virtual void _get_legal_moves(const class Position &pos, vec2 current, std::vector<vec2> &out_legal_destinations, bool check_king_exposure) const = 0;
+    virtual void _get_legal_moves(const class Position &pos, vec2 current, std::vector<vec2> &out_legal_destinations, bool check_king_exposure) const;
     virtual void _move(class Position &pos, Move m) const;
 };
