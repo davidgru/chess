@@ -1,30 +1,58 @@
-BIN = main.exe
+CXX := g++
 
-CFLAGS = -g -O0 -std=c++1z  -Wall -Wextra -Wconversion
-LDFLAGS = 
-SRC = \
-	controller/Command.cpp controller/command/MoveCommand.cpp controller/command/QuitCommand.cpp \
-	controller/command/SelectCommand.cpp \
+SRC_DIR := src
+OBJ_DIR := obj
+BIN_DIR := bin
+
+SRC_EXT := cpp
+
+TARGET := $(BIN_DIR)/main.exe
+
+_SRC := \
+	main.cpp \
+	\
+	controller/Command.cpp \
+	controller/command/MoveCommand.cpp controller/command/QuitCommand.cpp controller/command/SelectCommand.cpp \
 	\
 	model/Chess.cpp \
-	model/misc/DirectionSpecSupplier.cpp \
-	model/position/Position.cpp model/Position/CastlingRights.cpp \
 	model/color/ColorSpecSupplier.cpp \
+	model/misc/DirectionSpecSupplier.cpp \
 	model/piece/PieceHandler.cpp model/piece/PieceHandlerSupplier.cpp \
-	model/piece/piecehandler/BishopHandler.cpp model/piece/piecehandler/KingHandler.cpp model/piece/piecehandler/KnightHandler.cpp \
-	model/piece/piecehandler/NullHandler.cpp model/piece/piecehandler/PawnHandler.cpp model/piece/piecehandler/QueenHandler.cpp \
-	model/piece/piecehandler/RookHandler.cpp model/piece/piecehandler/StraightMovingPieceHandler.cpp \
+	model/piece/piecehandler/BishopHandler.cpp model/piece/piecehandler/KingHandler.cpp model/piece/piecehandler/KnightHandler.cpp model/piece/piecehandler/NullHandler.cpp \
+	model/piece/piecehandler/PawnHandler.cpp model/piece/piecehandler/QueenHandler.cpp model/piece/piecehandler/RookHandler.cpp model/piece/piecehandler/StraightMovingPieceHandler.cpp \
+	model/position/CastlingRights.cpp model/position/Position.cpp \
 	\
-	view/console_view/CommandParser.cpp view/console_view/ConsoleSession.cpp \
-	view/console_view/PieceTextures.cpp view/console_view/Screenbuffer.cpp \
-	\
-	main.cpp
+	view/console_view/CommandParser.cpp view/console_view/ConsoleSession.cpp view/console_view/PieceTextures.cpp view/console_view/Screenbuffer.cpp
 
-$(BIN): $(SRC)
-	g++ $(CFLAGS) $(LDFLAGS) -o $@ $^ 
+
+SRC := $(addprefix $(SRC_DIR)/, $(_SRC))
+OBJ := $(patsubst $(SRC_DIR)/%.$(SRC_EXT), $(OBJ_DIR)/%.o, $(SRC))
+OBJ_DIRS := $(dir $(OBJ))
+
+CPPFLAGS :=
+CFLAGS :=
+LDFLAGS :=
+LDLIBS :=
+
+$(TARGET): $(OBJ) | $(BIN_DIR)
+	$(CXX) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(BIN_DIR):
+	@mkdir -p $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+all: $(TARGET)
 
 clean:
-	del $(BIN)
+	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 
 rebuild:
-	make clean && make
+	@make clean
+	make
+
+.PHONY: all clean rebuild
+
+-include $(OBJ:.o=.d)
