@@ -7,7 +7,8 @@
     static const DirectionSpec null{
         -1,
         -1,
-        -1};
+        -1,
+    };
 
     static const DirectionSpec left{
         0,
@@ -18,7 +19,8 @@
     static const DirectionSpec right{
         7,
         6,
-        5};
+        5,
+    };
 
     switch (direction)
     {
@@ -27,7 +29,6 @@
     case Direction::RIGHT:
         return right;
     default:
-        throw "nulldsp";
         return null;
     }
 }
