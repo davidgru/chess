@@ -19,6 +19,10 @@ template <class Item, int BHeight, int BWidth>
 class Board
 {
 public:
+    using value_type = std::pair<vec2, Item>;
+
+    using Iterator = typename std::array<value_type, BHeight * BWidth>::const_iterator;
+
     constexpr Board(Item default_item)
         : default_item(default_item)
     {
@@ -32,61 +36,14 @@ public:
         std::generate(buffer.begin(), buffer.end(), gen_pair_indices);
     }
 
-    struct Iterator
-    {
-
-        using iterator_category = std::forward_iterator_tag;
-        using difference_type = std::size_t;
-        using value_type = const std::pair<vec2, Item>;
-        using pointer = value_type *;
-        using reference = value_type &;
-
-        constexpr Iterator(value_type *p) : p(p) {}
-
-        constexpr value_type &operator*() const
-        {
-            return *p;
-        };
-        constexpr value_type *operator->()
-        {
-            return p;
-        };
-
-        constexpr Iterator &operator++()
-        {
-            p++;
-            return *this;
-        }
-
-        constexpr Iterator operator++(int)
-        {
-            Iterator tmp = *this;
-            ++(*this);
-            return tmp;
-        }
-
-        constexpr bool operator==(const Iterator &other) const
-        {
-            return this->p == other.p;
-        }
-
-        constexpr bool operator!=(const Iterator &other) const
-        {
-            return this->p != other.p;
-        }
-
-    private:
-        value_type *p;
-    };
-
     constexpr Iterator begin() const
     {
-        return Iterator(&this->buffer[0]);
+        return this->buffer.cbegin();
     }
 
     constexpr Iterator end() const
     {
-        return Iterator(&this->buffer[BHeight * BWidth]);
+        return this->buffer.cend();
     }
 
     constexpr Item get(vec2 v) const
@@ -101,7 +58,7 @@ public:
 
     constexpr void place(Item item, vec2 v)
     {
-        this->get_ref(v) = item;
+        this->buffer[v.r * BWidth + v.c].second = item;
     }
 
     constexpr Item take(vec2 v)
@@ -144,18 +101,8 @@ public:
         return v.r >= 0 && v.r < Height() && v.c >= 0 && v.c < Width();
     }
 
-    constexpr const std::pair<vec2, Item> &get_array_ref(vec2 v) const
-    {
-        return this->buffer[v.r * BWidth + v.c];
-    }
-
-    constexpr Item &get_ref(vec2 v)
-    {
-        return this->buffer[v.r * BWidth + v.c].second;
-    }
-
 private:
-    std::array<std::pair<vec2, Item>, BHeight * BWidth> buffer;
+    std::array<value_type, Height() * Width()> buffer;
     Item default_item;
 };
 
