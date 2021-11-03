@@ -1,12 +1,14 @@
 CXX := clang++
 
+BIN := chess.exe
+
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
 
-SRC_EXT := cpp
+TARGET := $(BIN_DIR)/$(BIN)
 
-TARGET := $(BIN_DIR)/main.exe
+SRC_EXT := cpp
 
 _SRC := \
 	main.cpp \
