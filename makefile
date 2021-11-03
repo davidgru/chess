@@ -26,7 +26,7 @@ _SRC := \
 
 
 SRC := $(addprefix $(SRC_DIR)/, $(_SRC))
-OBJ := $(addprefix $(SRC_%DIR)/%.$(SRC_EXT), $(OBJ_DIR)/%.o, $(SRC))
+OBJ := $(patsubst $(SRC_DIR)/%.$(SRC_EXT), $(OBJ_DIR)/%.o, $(SRC))
 OBJ_DIRS := $(dir $(OBJ))
 
 CPPFLAGS :=
