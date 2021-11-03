@@ -2,5 +2,6 @@
 # ignore vscode config
 .vscode/
 
+# ignore build folders
 bin/
 obj/
