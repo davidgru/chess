@@ -24,7 +24,6 @@ _SRC := \
 	\
 	view/console_view/CommandParser.cpp view/console_view/ConsoleSession.cpp view/console_view/PieceTextures.cpp view/console_view/Screenbuffer.cpp
 
-
 SRC := $(addprefix $(SRC_DIR)/, $(_SRC))
 OBJ := $(patsubst $(SRC_DIR)/%.$(SRC_EXT), $(OBJ_DIR)/%.o, $(SRC))
 OBJ_DIRS := $(dir $(OBJ))
