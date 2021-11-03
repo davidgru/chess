@@ -1,11 +1,11 @@
 #pragma once
 
-#include <array>
 #include <algorithm>
-
+#include <array>
 #include <climits>
 #include <cstddef>
 #include <functional>
+#include <numeric>
 
 #include "../misc/vec2.h"
 
@@ -108,22 +108,21 @@ namespace std
     template <class Item, int Width, int Height>
     struct hash<Board<Item, Width, Height>>
     {
-        constexpr size_t operator()(const Board<Item, Height, Width> &b) const
+        constexpr std::size_t operator()(const Board<Item, Height, Width> &b) const
         {
-            size_t h = 0;
-            for (const auto &[pos, item] : b)
+            auto acc = [](const std::size_t &a, const std::pair<vec2, Item> &b)
             {
-                size_t ih = std::hash<Item>()(item);
-                h = sal(h, 1) ^ ih;
-            }
-            return h;
+                std::size_t h = std::hash<Item>()(b.second);
+                return sal(a, 1) ^ h;
+            };
+            return std::accumulate(b.begin(), b.end(), std::size_t{0}, acc);
         }
 
     private:
         // shift arithmetic left
-        static constexpr size_t sal(size_t s, unsigned int c)
+        static constexpr std::size_t sal(size_t s, unsigned int c)
         {
-            const size_t mask = (CHAR_BIT * sizeof(s) - 1);
+            const std::size_t mask = (CHAR_BIT * sizeof(s) - 1);
             c &= mask;
             return (s << c) | (s >> ((-c) & mask));
         }
