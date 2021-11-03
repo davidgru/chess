@@ -30,7 +30,7 @@ SRC := $(addprefix $(SRC_DIR)/, $(_SRC))
 OBJ := $(addprefix $(OBJ_DIR)/, $(_SRC:.$(SRC_EXT)=.o))
 
 CPPFLAGS :=
-CFLAGS := -std=c++17 -g -O0 -Werror -Wall -Wextra
+CFLAGS := -std=c++17 -O3 -Werror -Wall -Wextra
 LDFLAGS :=
 LDLIBS :=
 
