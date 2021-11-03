@@ -25,18 +25,16 @@ _SRC := \
 	view/console_view/CommandParser.cpp view/console_view/ConsoleSession.cpp view/console_view/PieceTextures.cpp view/console_view/Screenbuffer.cpp
 
 SRC := $(addprefix $(SRC_DIR)/, $(_SRC))
-OBJ := $(patsubst $(SRC_DIR)/%.$(SRC_EXT), $(OBJ_DIR)/%.o, $(SRC))
+OBJ := $(addprefix $(OBJ_DIR)/, $(_SRC:.$(SRC_EXT)=.o))
 
 CPPFLAGS :=
 CFLAGS := -std=c++17 -O3 -Werror -Wall -Wextra
 LDFLAGS :=
 LDLIBS :=
 
-$(TARGET): $(OBJ) | $(BIN_DIR)
+$(TARGET): $(OBJ)
+	@mkdir -p $(BIN_DIR)
 	$(CXX) $(LDFLAGS) $^ $(LDLIBS) -o $@
-
-$(BIN_DIR):
-	@mkdir -p $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
@@ -48,8 +46,7 @@ clean:
 	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 
 rebuild:
-	make clean
-	make
+	make clean && make
 
 .PHONY: all clean rebuild
 
