@@ -67,14 +67,14 @@ void Screenbuffer::reset()
     {
         int midr = ROW_INDICES_HEIGHT_OFFSET + i * th + th / 2;
         int midc = ROW_INDICES_WIDTH_OFFSET + ROW_INDICES_WIDTH / 2;
-        this->get(midr, midc) = static_cast<char>((Chessboard::Height() - i - 1) + 49); // convert to ascii number
+        this->get(midr, midc) = static_cast<char>((Chessboard::Height() - i - 1) + '1'); // convert to ascii number
     }
     // draw column indices
     for (int j = 0; j < Chessboard::Width(); j++)
     {
         int midr = COLUMN_INDICES_HEIGHT_OFFSET + COLUMN_INDICES_HEIGHT / 2;
         int midc = COLUMN_INDICES_WIDTH_OFFSET + j * tw + tw / 2;
-        this->get(midr, midc) = static_cast<char>(j + 97); // convert to ascii letter
+        this->get(midr, midc) = static_cast<char>(j + 'a'); // convert to ascii letter
     }
 }
 
