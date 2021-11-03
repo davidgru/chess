@@ -1,14 +1,11 @@
 #pragma once
 
-#include <cstddef>
-#include <functional>
-
 #include <array>
 #include <algorithm>
 
-#include <iostream>
-
-#include <iterator>
+#include <climits>
+#include <cstddef>
+#include <functional>
 
 #include "../misc/vec2.h"
 

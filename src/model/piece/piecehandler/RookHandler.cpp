@@ -5,9 +5,6 @@
 
 void RookHandler::_get_legal_moves(const Position &pos, vec2 current, std::vector<vec2> &out_legal_destinations, bool /*check_king_exposure*/) const
 {
-    if (pos.get(current).type != PieceType::ROOK)
-        std::cerr << "RookHandler called illegally!\n";
-
     this->scan_direction(pos, current, {1, 0}, out_legal_destinations);
     this->scan_direction(pos, current, {0, 1}, out_legal_destinations);
     this->scan_direction(pos, current, {-1, 0}, out_legal_destinations);
