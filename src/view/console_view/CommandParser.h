@@ -7,7 +7,7 @@ class CommandParser
 {
 public:
     // Returns true on error.
-    static bool parse(const std::string_view &command_str, std::string &out_command_name, std::vector<std::string> &out_str_params);
+    static bool parse(const std::string &command_str, std::string &out_command_name, std::vector<std::string> &out_str_params);
 
 private:
     CommandParser();
