@@ -114,13 +114,10 @@ namespace std
         constexpr size_t operator()(const Board<Item, Height, Width> &b) const
         {
             size_t h = 0;
-            for (int i = 0; i < Height; i++)
+            for (const auto &[pos, item] : b)
             {
-                for (int j = 0; j < Width; j++)
-                {
-                    size_t ih = std::hash<Item>()(b.get({i, j}));
-                    h = sal(h, 1) ^ ih;
-                }
+                size_t ih = std::hash<Item>()(item);
+                h = sal(h, 1) ^ ih;
             }
             return h;
         }
