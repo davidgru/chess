@@ -58,7 +58,7 @@ private:
     static const int COLUMN_INDICES_WIDTH = BOARD_WIDTH;
 
     static const int MESSAGE_BOARD_HEIGHT = BOARD_HEIGHT;
-    static const int MESSAGE_BOARD_WIDTH = 100;
+    static const int MESSAGE_BOARD_WIDTH = 80;
 
     static const int MESSAGE_BOARD_HEIGHT_OFFSET = BOARD_HEIGHT_OFFSET;
     static const int MESSAGE_BOARD_WIDTH_OFFSET =
