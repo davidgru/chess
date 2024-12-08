@@ -69,10 +69,11 @@ void ConsoleSession::process_command()
 
     if (CommandParser::parse(input_str, command_name, param_strs))
         return;
+    
+    if (this->commands.count(command_name) == 0)
+        return;
 
     Command *command = this->commands[command_name];
-    if (command == nullptr)
-        return;
     Result result = command->apply(param_strs);
     if (result.quit)
         this->over = true;
